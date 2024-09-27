@@ -1,4 +1,7 @@
-FROM ubuntu
-RUN apt-get update && apt-get install -y apache2
-EXPOSE 80
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+FROM node:18-alpine
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
